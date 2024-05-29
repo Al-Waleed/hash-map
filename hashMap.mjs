@@ -35,9 +35,27 @@ function hashMap() {
     }
   };
 
+  const get = (key) => {
+    const index = hash(key);
+    // to check if the key at the specified index == the key we entered
+    if (map[index].key === key) {
+      return map[index].value;
+    } else {
+      // check every node inside the linked list until we find the key
+      let pointer = map[index];
+      while (pointer.next !== null) {
+        pointer = pointer.next;
+        if (pointer.key === key) {
+          return pointer.value;
+        }
+      }
+    }
+  };
+
   return {
     map,
     set,
+    get,
   };
 }
 
@@ -50,4 +68,11 @@ testHashMap.set("test3", "3");
 testHashMap.set("test4", "4");
 testHashMap.set("test5", "5");
 
-console.log(testHashMap.map)
+console.log(testHashMap.map);
+
+console.log(testHashMap.get("test"));
+console.log(testHashMap.get("test1"));
+console.log(testHashMap.get("test2"));
+console.log(testHashMap.get("test3"));
+console.log(testHashMap.get("test4"));
+console.log(testHashMap.get("test5"));
