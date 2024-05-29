@@ -56,10 +56,31 @@ function hashMap() {
     }
   };
 
+  // the same code as get() but instead of a value it returns true or false
+  const has = (key) => {
+    const index = hash(key);
+    // to check if the key at the specified index = the key we entered
+    if (map[index].key === key) {
+      return true;
+    } else {
+      // check every node inside the linked list until we find the key and return true
+      let pointer = map[index];
+      while (pointer.next !== null) {
+        pointer = pointer.next;
+        if (pointer.key === key) {
+          return true;
+        }
+      }
+    }
+    // if the key isn't found we return false
+    return false
+  };
+
   return {
     map,
     set,
     get,
+    has,
   };
 }
 
@@ -80,9 +101,11 @@ testHashMap.set("test", "00");
 
 console.log(testHashMap.map);
 
-console.log(testHashMap.get("test"));
-console.log(testHashMap.get("test1"));
-console.log(testHashMap.get("test2"));
-console.log(testHashMap.get("test3"));
-console.log(testHashMap.get("test4"));
-console.log(testHashMap.get("test5"));
+console.log(testHashMap.has("testss"));
+console.log(testHashMap.has("aa"));
+console.log(testHashMap.has("aab"));
+console.log(testHashMap.has("aaa"));
+console.log(testHashMap.has("test2"));
+console.log(testHashMap.has("test3"));
+console.log(testHashMap.has("test4"));
+console.log(testHashMap.has("test5"));
