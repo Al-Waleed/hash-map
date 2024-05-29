@@ -28,8 +28,12 @@ function hashMap() {
       let pointer = map[index];
       // to reach the last node
       while (pointer.next !== null) {
-        //!!! i need to create a function that checks if the key exits and update its value
         pointer = pointer.next;
+        // if we find the pointer with the wanted key we update its value then stop
+        if (pointer.key === key) {
+          pointer.value = value;
+          return;
+        }
       }
       pointer.next = node(key, value);
     }
@@ -67,6 +71,12 @@ testHashMap.set("test2", "2");
 testHashMap.set("test3", "3");
 testHashMap.set("test4", "4");
 testHashMap.set("test5", "5");
+testHashMap.set("a", "a");
+testHashMap.set("aa", "aa");
+testHashMap.set("aaa", "aaa");
+testHashMap.set("test2", "22");
+testHashMap.set("test3", "333");
+testHashMap.set("test", "00");
 
 console.log(testHashMap.map);
 
