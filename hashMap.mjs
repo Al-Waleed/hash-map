@@ -11,4 +11,26 @@ function hashMap() {
 
     return hashCode;
   };
+
+  const set = (key, value) => {
+    const hashed = hash(key);
+    // add the key value pain to the index of the hash if its empty
+    if (map[hashed] === undefined) {
+      map[hashed] = { key: value };
+    }
+    // else if (map[hashed] !== undefined) {
+    //   // code for linked lists (ill add it later)
+    // }
+  };
+
+  return {
+    map,
+    set,
+  };
 }
+
+const testHashMap = hashMap()
+
+testHashMap.set("waleed", "age:24");
+
+console.log(testHashMap.map);
