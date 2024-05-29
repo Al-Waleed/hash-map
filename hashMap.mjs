@@ -73,7 +73,42 @@ function hashMap() {
       }
     }
     // if the key isn't found we return false
-    return false
+    return false;
+  };
+
+  const remove = (key) => {
+    const index = hash(key);
+    // check if the key is at the head of the linked list
+    if (map[index].key === key) {
+      // when the node that has the key is the head node we check if there's a node after it
+      // if there's another node after it then the node we want to delete must equal to the next node
+      if (map[index].next !== null) {
+        map[index] = node(
+          // this refers to the key,value and .next of the node after the one we want to delete
+          map[index].next.key,
+          map[index].next.value,
+          map[index].next.next
+        );
+        return true;
+      } else {
+        // if there isn't a node after it then we delete it without worrying about the next node
+        map[index] = undefined;
+        return true;
+      }
+    }//i got the logic to remove the node if its the head
+    // !!in the next else i need the logic to remove nested nodes
+    // else {
+      // let pointer = map[index];
+      // while (pointer.next !== null) {
+        // if (pointer.key === key) {
+          // console.log(pointer)
+          // pointer = pointer.next;
+          // return pointer.value;
+        // }
+      // }
+// 
+      // return false;
+    // }
   };
 
   return {
@@ -81,6 +116,7 @@ function hashMap() {
     set,
     get,
     has,
+    remove,
   };
 }
 
@@ -99,13 +135,18 @@ testHashMap.set("test2", "22");
 testHashMap.set("test3", "333");
 testHashMap.set("test", "00");
 
-console.log(testHashMap.map);
+// console.log(testHashMap.remove("a"));
+// testHashMap.remove("test1");
+// testHashMap.remove("test5");
+testHashMap.remove("test3");
 
-console.log(testHashMap.has("testss"));
-console.log(testHashMap.has("aa"));
-console.log(testHashMap.has("aab"));
-console.log(testHashMap.has("aaa"));
-console.log(testHashMap.has("test2"));
-console.log(testHashMap.has("test3"));
-console.log(testHashMap.has("test4"));
-console.log(testHashMap.has("test5"));
+console.log(testHashMap.map[1]);
+
+// console.log(testHashMap.has("testss"));
+// console.log(testHashMap.has("aa"));
+// console.log(testHashMap.has("aab"));
+// console.log(testHashMap.has("aaa"));
+// console.log(testHashMap.has("test2"));
+// console.log(testHashMap.has("test3"));
+// console.log(testHashMap.has("test4"));
+// console.log(testHashMap.has("test5"));
