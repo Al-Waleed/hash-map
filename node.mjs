@@ -1,3 +1,3 @@
-export default function node(value = null, next = null) {
+export default function node(value = null, key = null, next = null) {
   return { value, next };
 }
