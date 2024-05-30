@@ -131,8 +131,11 @@ function hashMap() {
     let keyCount = 0;
     // map over the buckets we have in the map
     map.forEach((bucket) => {
-      let pointer = bucket;
-      // to check for nested nodes in each bucket
+      // to check if the bucket is empty or not
+      if (bucket !== undefined) {
+        
+        let pointer = bucket;
+        // to check for nested nodes in each bucket
       while (pointer.next) {
         //add 1 to the count
         if (pointer.key) {
@@ -144,6 +147,7 @@ function hashMap() {
       if (pointer.key) {
         keyCount += 1;
       }
+    }
     });
     return keyCount;
   };
@@ -206,7 +210,8 @@ testHashMap.set("aaaaaaa", "aaa");
 console.log("_________________________________");
 console.log(testHashMap.map);
 console.log("_________________________________");
+console.log(testHashMap.clear());
 
-// console.log(testHashMap.length());
+console.log(testHashMap.length());
 
 
