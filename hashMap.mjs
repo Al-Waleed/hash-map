@@ -148,6 +148,16 @@ function hashMap() {
     return keyCount;
   };
 
+  const clear = () => {
+    console.log(map);
+   
+    for (let i = 0; i < map.length; i++) {
+      map[i] = undefined
+    }
+    console.log("_________________________________");
+    console.log(map);
+  };
+
   return {
     map,
     set,
@@ -155,6 +165,7 @@ function hashMap() {
     has,
     remove,
     length,
+    clear,
   };
 }
 
@@ -173,5 +184,29 @@ testHashMap.set("aaaaa", "aaa");
 testHashMap.set("aaaaaa", "aaa");
 testHashMap.set("aaaaaaa", "aaa");
 
+// console.log(testHashMap.map);
+// console.log(testHashMap.length());
+
+console.log(testHashMap.clear());
+
+
+testHashMap.set("test1", "1");
+testHashMap.set("test2", "2");
+testHashMap.set("test3", "3");
+testHashMap.set("test4", "4");
+testHashMap.set("test5", "5");
+testHashMap.set("a", "a");
+testHashMap.set("aa", "aa");
+testHashMap.set("aaa", "aaa");
+testHashMap.set("aaaa", "aaa");
+testHashMap.set("aaaaa", "aaa");
+testHashMap.set("aaaaaa", "aaa");
+testHashMap.set("aaaaaaa", "aaa");
+
+console.log("_________________________________");
 console.log(testHashMap.map);
-console.log(testHashMap.length());
+console.log("_________________________________");
+
+// console.log(testHashMap.length());
+
+
