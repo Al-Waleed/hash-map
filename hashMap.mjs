@@ -95,20 +95,29 @@ function hashMap() {
         map[index] = undefined;
         return true;
       }
-    }//i got the logic to remove the node if its the head
-    // !!in the next else i need the logic to remove nested nodes
-    // else {
-      // let pointer = map[index];
-      // while (pointer.next !== null) {
-        // if (pointer.key === key) {
-          // console.log(pointer)
-          // pointer = pointer.next;
-          // return pointer.value;
-        // }
-      // }
-// 
-      // return false;
-    // }
+      // to if there's another node in the list
+    } else if (map[index].next !== null) {
+      let pointer = map[index];
+      // to loop over the nodes in the list but using .next.next stops at the node second to last because we want to be able to check its .next.key then remove it if it matches
+      while (pointer.next.next !== null) {
+        // if the key on the next node matches we remove it 
+        if (pointer.next.key === key) {
+          pointer.next = node(
+            pointer.next.next.key,
+            pointer.next.next.value,
+            pointer.next.next.next
+          );
+          return true;
+        }
+        pointer = pointer.next;
+      }
+      // we still have to check the last node in the list 
+      if (pointer.next.key === key) {
+        pointer.next = null;
+        return true;
+      }
+    } 
+      return false;
   };
 
   return {
@@ -138,9 +147,17 @@ testHashMap.set("test", "00");
 // console.log(testHashMap.remove("a"));
 // testHashMap.remove("test1");
 // testHashMap.remove("test5");
-testHashMap.remove("test3");
+console.log(testHashMap.remove("aa"));
+console.log(testHashMap.remove("a"));
+console.log(testHashMap.remove("aaa"));
+console.log(testHashMap.remove("test4"));
+console.log(testHashMap.remove("test2"));
+console.log(testHashMap.remove("test3"));
+console.log(testHashMap.remove("test"));
+console.log(testHashMap.remove("test1"));
+console.log(testHashMap.remove("test5"));
 
-console.log(testHashMap.map[1]);
+console.log(testHashMap.map);
 
 // console.log(testHashMap.has("testss"));
 // console.log(testHashMap.has("aa"));
