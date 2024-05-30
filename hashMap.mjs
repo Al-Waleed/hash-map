@@ -133,33 +133,51 @@ function hashMap() {
     map.forEach((bucket) => {
       // to check if the bucket is empty or not
       if (bucket !== undefined) {
-        
         let pointer = bucket;
         // to check for nested nodes in each bucket
-      while (pointer.next) {
-        //add 1 to the count
+        while (pointer.next) {
+          //add 1 to the count
+          if (pointer.key) {
+            keyCount += 1;
+          }
+          pointer = pointer.next;
+        }
+        // to check for the key in single node buckets && to check the last node for its key because the while loop doesn't go over it
         if (pointer.key) {
           keyCount += 1;
         }
-        pointer = pointer.next;
       }
-      // to check for a key and add 1 to the counter && to check for the last ket because the while loop doesn't go over it
-      if (pointer.key) {
-        keyCount += 1;
-      }
-    }
     });
     return keyCount;
   };
 
   const clear = () => {
-    console.log(map);
-   
     for (let i = 0; i < map.length; i++) {
-      map[i] = undefined
+      map[i] = undefined;
     }
-    console.log("_________________________________");
-    console.log(map);
+  };
+
+  const keys = () => {
+    let keys = [];
+    // map over the buckets we have in the map
+    map.forEach((bucket) => {
+      // to check if the bucket is empty or not
+      if (bucket !== undefined) {
+        let pointer = bucket;
+        // to check for nested nodes in each bucket
+        while (pointer.next) {
+          if (pointer.key) {
+            keys.push(pointer.key);
+          }
+          pointer = pointer.next;
+        }
+        // to check for the key in single node buckets && to check the last node for its key because the while loop doesn't go over it
+        if (pointer.key) {
+          keys.push(pointer.key);
+        }
+      }
+    });
+    return keys;
   };
 
   return {
@@ -170,6 +188,7 @@ function hashMap() {
     remove,
     length,
     clear,
+    keys,
   };
 }
 
@@ -188,30 +207,8 @@ testHashMap.set("aaaaa", "aaa");
 testHashMap.set("aaaaaa", "aaa");
 testHashMap.set("aaaaaaa", "aaa");
 
-// console.log(testHashMap.map);
-// console.log(testHashMap.length());
+console.log(testHashMap.keys());
 
-console.log(testHashMap.clear());
+testHashMap.clear();
 
-
-testHashMap.set("test1", "1");
-testHashMap.set("test2", "2");
-testHashMap.set("test3", "3");
-testHashMap.set("test4", "4");
-testHashMap.set("test5", "5");
-testHashMap.set("a", "a");
-testHashMap.set("aa", "aa");
-testHashMap.set("aaa", "aaa");
-testHashMap.set("aaaa", "aaa");
-testHashMap.set("aaaaa", "aaa");
-testHashMap.set("aaaaaa", "aaa");
-testHashMap.set("aaaaaaa", "aaa");
-
-console.log("_________________________________");
-console.log(testHashMap.map);
-console.log("_________________________________");
-console.log(testHashMap.clear());
-
-console.log(testHashMap.length());
-
-
+console.log(testHashMap.keys());
