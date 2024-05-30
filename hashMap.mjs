@@ -203,6 +203,29 @@ function hashMap() {
     return values;
   };
 
+  const entries = () => {
+    let entries = [];
+    // map over the buckets we have in the map
+    map.forEach((bucket) => {
+      // to check if the bucket is empty or not
+      if (bucket !== undefined) {
+        let pointer = bucket;
+        // to check for nested nodes in each bucket
+        while (pointer.next) {
+          if (pointer.value) {
+            entries.push(`${pointer.key}: ${pointer.value}`);
+          }
+          pointer = pointer.next;
+        }
+        // to check for entries in single node buckets && to check the last node for its entries because the while loop doesn't go over it
+        if (pointer.value) {
+          entries.push(`${pointer.key}: ${pointer.value}`);
+        }
+      }
+    });
+    return entries;
+  };
+
   return {
     map,
     set,
@@ -213,6 +236,7 @@ function hashMap() {
     clear,
     keys,
     values,
+    entries,
   };
 }
 
@@ -225,17 +249,18 @@ testHashMap.set("test4", "4Waleed");
 testHashMap.set("test5", "5Waleed");
 testHashMap.set("a", "a");
 testHashMap.set("aa", "aa");
-testHashMap.set("aaa", "aaa");
-testHashMap.set("aaaa", "aaa");
-testHashMap.set("aaaaa", "aaa");
-testHashMap.set("aaaaaa", "aaa");
-testHashMap.set("aaaaaaa", "aaa");
+testHashMap.set("aaa", "111");
+testHashMap.set("aaaa", "111");
+testHashMap.set("aaaaa", "111");
+testHashMap.set("aaaaaa", "111");
 
 console.log(testHashMap.keys());
 console.log(testHashMap.values());
+console.log(testHashMap.entries());
 
 testHashMap.clear();
 
 console.log(testHashMap.keys());
 console.log(testHashMap.values());
+console.log(testHashMap.entries());
 
