@@ -127,18 +127,39 @@ function hashMap() {
     } else return false;
   };
 
+  const length = () => {
+    let keyCount = 0;
+    // map over the buckets we have in the map
+    map.forEach((bucket) => {
+      let pointer = bucket;
+      // to check for nested nodes in each bucket
+      while (pointer.next) {
+        //add 1 to the count
+        if (pointer.key) {
+          keyCount += 1;
+        }
+        pointer = pointer.next;
+      }
+      // to check for a key and add 1 to the counter && to check for the last ket because the while loop doesn't go over it
+      if (pointer.key) {
+        keyCount += 1;
+      }
+    });
+    return keyCount;
+  };
+
   return {
     map,
     set,
     get,
     has,
     remove,
+    length,
   };
 }
 
 const testHashMap = hashMap();
 
-testHashMap.set("test", "0");
 testHashMap.set("test1", "1");
 testHashMap.set("test2", "2");
 testHashMap.set("test3", "3");
@@ -147,30 +168,10 @@ testHashMap.set("test5", "5");
 testHashMap.set("a", "a");
 testHashMap.set("aa", "aa");
 testHashMap.set("aaa", "aaa");
-testHashMap.set("test2", "22");
-testHashMap.set("test3", "333");
-testHashMap.set("test", "00");
-
-// console.log(testHashMap.remove("a"));
-// testHashMap.remove("test1");
-// testHashMap.remove("test5");
-console.log(testHashMap.remove("aa"));
-console.log(testHashMap.remove("a"));
-console.log(testHashMap.remove("aaa"));
-console.log(testHashMap.remove("test4"));
-console.log(testHashMap.remove("test2"));
-// console.log(testHashMap.remove("test2"));
-// console.log(testHashMap.remove("test3"));
-// console.log(testHashMap.remove("test"));
-// console.log(testHashMap.remove("test1"));
+testHashMap.set("aaaa", "aaa");
+testHashMap.set("aaaaa", "aaa");
+testHashMap.set("aaaaaa", "aaa");
+testHashMap.set("aaaaaaa", "aaa");
 
 console.log(testHashMap.map);
-
-// console.log(testHashMap.has("testss"));
-// console.log(testHashMap.has("aa"));
-// console.log(testHashMap.has("aab"));
-// console.log(testHashMap.has("aaa"));
-console.log(testHashMap.has("test2"));
-// console.log(testHashMap.has("test3"));
-// console.log(testHashMap.has("test4"));
-// console.log(testHashMap.has("test5"));
+console.log(testHashMap.length());
